@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Input;
+
+use Illuminate\Support\Facades\Validator;
+
 use App\User;
+use App\Role;
 
 class AdminUsersController extends Controller
 {
@@ -26,8 +31,8 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        $sampleuser = User::find(1);
-        return view('admin.users.create', compact('sampleuser'));
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -38,7 +43,29 @@ class AdminUsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // New User
+        // $user = User::create(['name'=>$request->name, 'email'=>$request->email, 'password'=> 'role'=>$request->role, ]);
+
+        // $this->validate($request, [
+		// 'name' => ['required', 'string', 'max:255'],
+        // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        // 'password' => ['required', 'string', 'min:6', 'confirmed'],
+        // 'password_confirmation' => ['required', 'string', 'min:6', 'same:password'],
+        // 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        // ]);
+
+    	// if($request->file('avatar')){
+        //    $file = $request->file('avatar');
+        //    $filename = $file->getClientOriginalName();
+        //    $file->move(public_path('user_uploads/avatars'),$filename);
+	    // }else{
+        //     $filename = 'default.jpg';
+        // }
+        // $user = User::create($request->all());
+        
+        // session()->flash('success','User Created Successfully');
+        // return redirect()->back();
+        return $request->all();
     }
 
     /**
