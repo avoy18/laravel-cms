@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UsersRequest;
 
 use Illuminate\Support\Facades\Input;
 
@@ -41,7 +42,7 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
         // New User
         // $user = User::create(['name'=>$request->name, 'email'=>$request->email, 'password'=> 'role'=>$request->role, ]);
@@ -65,7 +66,7 @@ class AdminUsersController extends Controller
         
         // session()->flash('success','User Created Successfully');
         // return redirect()->back();
-        return $request->all();
+        User::create($request->all());
     }
 
     /**

@@ -66,7 +66,7 @@
                     {{-- Role --}}
                     <div class="form-group col-md-6">
                         <label for="role" class=" form-control-label">User Role</label>
-                        <select  id="role" name="role" class="form-control">
+                        <select  id="role" name="role_id" class="form-control">
                             @if($roles)
                                 @foreach($roles as $r)
                                 <option value="{{ $r->id }}">{{ $r->name }}</option>
