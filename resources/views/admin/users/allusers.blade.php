@@ -32,20 +32,17 @@
                                                     <td class="number">{{ $loop->iteration }}</td>
                                                     <td class="avatar">
                                                         <div class="round-img">
-                                                            @if( $user->image)
-                                                        <a href="{{ url('users', $user->id) }}"><img class="rounded-circle" src="{{ asset('images/'), $user->image->path }}" alt=""></a>
-                                                            @else
-                                                            <a href="{{ url('users', $user->id) }}"><img class="rounded-circle" src="{{ asset('images/avatar/1.jpg') }}" alt=""></a>
-                                                            @endif
+                                                        <a href="{{ url('users', $user->id) }}"><img class="rounded-circle" src="{{ $user->image ? asset($user->image->path) : asset('images/avatar/1.jpg')  }}" alt=""></a>
                                                         </div>
                                                     </td>
                                                 <td> <a href="{{ url('users', $user->id) }}"> <span class="name">{{ $user->name }}</span> </a></td>
-                                                    <td> <span class="role">@if($user->role->name) {{ $user->role->name}} @endif</span> </td>
+                                                    <td> <span class="role">{{ $user->role ? $user->role->name : 'No Role' }} </span> </td>
                                                     <td>
-                                                        @if( $user->is_active == 1)
-                                                        <span class="badge badge-complete">Active</span>
-                                                        @else 
+                                                        @if( !$user->is_active == 1)
                                                         <span class="badge badge-danger">Inactive</span>
+                                                        @else 
+                                                        <span class="badge badge-complete">Active</span>
+
                                                         @endif
                                                     </td>
                                                 </tr>

@@ -30,7 +30,7 @@ class UsersRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required|same:password',
-            /*'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'*/
+            'avatar' => 'image|max:2048'
         ];
     }
 }
