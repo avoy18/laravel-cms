@@ -41,8 +41,8 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="/admin/users" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Users</a>
                             <ul class="sub-menu children dropdown-menu">
-                                    <li><i class="fa fa-puzzle-piece"></i><a href="/admin/users">All Users</a></li>
-                                    <li><i class="fa fa-plus"></i><a href="/admin/users/create">Add User</a></li>
+                                    <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('users.index') }}">All Users</a></li>
+                                    <li><i class="fa fa-plus"></i><a href="{{ route('users.create') }}">Add User</a></li>
                             </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">

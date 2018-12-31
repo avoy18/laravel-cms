@@ -32,15 +32,15 @@
                                                     <td class="number">{{ $loop->iteration }}</td>
                                                     <td class="avatar">
                                                         <div class="round-img">
-                                                            @if( !$user->avatar == null )
-                                                        <a href="{{ url('users', $user->id) }}"><img class="rounded-circle" src="{{ asset('images/'), $user->avatar }}" alt=""></a>
+                                                            @if( $user->image)
+                                                        <a href="{{ url('users', $user->id) }}"><img class="rounded-circle" src="{{ asset('images/'), $user->image->path }}" alt=""></a>
                                                             @else
                                                             <a href="{{ url('users', $user->id) }}"><img class="rounded-circle" src="{{ asset('images/avatar/1.jpg') }}" alt=""></a>
                                                             @endif
                                                         </div>
                                                     </td>
                                                 <td> <a href="{{ url('users', $user->id) }}"> <span class="name">{{ $user->name }}</span> </a></td>
-                                                    <td> <span class="role">{{ $user->role->name}}</span> </td>
+                                                    <td> <span class="role">@if($user->role->name) {{ $user->role->name}} @endif</span> </td>
                                                     <td>
                                                         @if( $user->is_active == 1)
                                                         <span class="badge badge-complete">Active</span>

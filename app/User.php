@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','is_active', 'avatar', 'role_id'
+        'name', 'email', 'password','is_active', 'role_id'
     ];
 
     /**
@@ -30,5 +30,9 @@ class User extends Authenticatable
 
     public function role(){
       return $this->belongsTo('App\Role');
+    }
+
+    public function image(){
+        return $this->morphOne('App\Image', 'imageable');
     }
 }
