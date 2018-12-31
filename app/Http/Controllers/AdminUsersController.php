@@ -61,7 +61,7 @@ class AdminUsersController extends Controller
     	if($request->file('avatar')){
            $file = $request->file('avatar');
            $filename = time() . '_' . $file->getClientOriginalName();
-           $path = 'user_uploads/avatars';
+           $path = 'user_uploads/avatars/' .  kebab_case($request->name);
            $user->image()->create(['path'=> $path . '/' . $filename]);
            $file->move($path, $filename);
 	    }else{
