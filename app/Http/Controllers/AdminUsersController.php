@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserEditRequest;
 use Illuminate\Support\Facades\Input;
-
 use Illuminate\Support\Facades\Validator;
 
 use App\User;
@@ -82,7 +81,8 @@ class AdminUsersController extends Controller
      */
     public function show($id)
     {
-        return view('admin.users.show');
+        $user = User::findOrFail($id);
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -132,7 +132,7 @@ class AdminUsersController extends Controller
             $file->move($path, $name);
         }
         
-        session()->flash('success','User Created Successfully');
+        session()->flash('success','User Updated Successfully');
         return redirect()->back();
     }
 
@@ -144,6 +144,8 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id)->delete();
+        session()->flash('success','User Deleted Successfully');
+        return redirect()->route('users.index');
     }
 }

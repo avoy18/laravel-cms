@@ -116,7 +116,17 @@
                     </div>
                     
                 </form>
+                <div class="col" style="padding-bottom:20px">
+                    <a href="#" style="color:red; " onclick="event.preventDefault();
+                    document.getElementById('delete-user').submit();">Delete</a>
+                </div>
+
+                <form method="POST" id="delete-user" style="display:none" action="{{ route('users.destroy', $user->id) }}">
+                @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
                 @endif
+
             </div>
             {{-- ./card --}}
         </div>

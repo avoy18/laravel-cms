@@ -28,11 +28,29 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // public function setPasswordAttribute($password){
+    //     if(!empty($password)){
+    //         $this->attributes['password'] = bcrypt($password);
+    //     }
+    // }
+
     public function role(){
       return $this->belongsTo('App\Role');
     }
 
     public function image(){
         return $this->morphOne('App\Image', 'imageable');
+    }
+
+    public function adminCheck(){
+        if($this->role){
+
+            if($this->role->name == 'Administrator'){
+                return true;
+
+            }
+        }
+        return false;
+        
     }
 }

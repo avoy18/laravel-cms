@@ -162,13 +162,18 @@
                         </a>
     
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="{{ route('users.show' , Auth::user()->id) }}"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="{{ route('users.show' , Auth::user()->id) }}"><i class="fa fa-user"></i>My Profile</a>
     
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
     
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-    
-                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" style="color:#e3342f" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out"></i>{{ __('Logout') }}
+                             </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                         </div>
                     </div>
                     @endif

@@ -9,6 +9,11 @@
                 <div class="users">
                     <div class="row">
                         <div class="col-xl-7">
+                                @if(Session::has('success'))
+                                <div class="alert alert-success">
+                                    <strong>Success!</strong> {{ Session::get('success') }}
+                                </div>
+                                @endif
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="box-title">All Users </h4>

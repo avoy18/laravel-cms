@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware'=>'web'], function(){
+
   
   Route::get('/', function () {
     return view('welcome');
@@ -20,15 +20,26 @@ Route::group(['middleware'=>'web'], function(){
 
   Route::get('/home', 'HomeController@index')->name('home');
 
-  Route::resource('admin/users', 'AdminUsersController');
 
-  Route::get('admin', function(){
-    return view('admin.dashboard');
+
+
+  Route::group(['middleware'=>'admin'], function(){
+
+    Route::resource('admin/users', 'AdminUsersController');
+
+    Route::get('admin', function(){
+
+      if(Auth::user()->role == 'Administrator'){
+      return view('admin.dashboard');
+      }
+      else{
+        return view('welcome');
+      }
+    
+    });
+
   });
 
 
 
-});
 
-
-Route::post('rotebal', 'AdminUsersController@upd');
