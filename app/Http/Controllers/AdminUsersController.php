@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
+use App\Http\Requests\UserEditRequest;
 use Illuminate\Support\Facades\Input;
 
 use Illuminate\Support\Facades\Validator;
@@ -92,7 +93,14 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user['allroles'] = Role::all();
+        if($user->role){
+            $currentrole = $user->role->name;
+        }else{
+            $currentrole = 'No role';
+        }
+        return view('admin.users.edit', compact('user', 'currentrole'));
     }
 
     /**
@@ -102,9 +110,30 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserEditRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        if(trim($request->password) == ''){
+            
+            $input = $request->except('password');
+
+        }else{
+        $input = $request->all();
+        $input['password'] = bcrypt($request['password']);
+        }
+
+        $user->update($input);
+
+    	if($file = $request->file('avatar')){
+            $name = time() . $file->getClientOriginalName();
+            $path = 'user_uploads/avatar/' . kebab_case($request->name);
+            $user->image()->create(['path'=> $path . '/' . $name]);
+            $file->move($path, $name);
+        }
+        
+        session()->flash('success','User Created Successfully');
+        return redirect()->back();
     }
 
     /**

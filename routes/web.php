@@ -27,4 +27,8 @@ Route::group(['middleware'=>'web'], function(){
   });
 
 
+
 });
+
+
+Route::post('rotebal', 'AdminUsersController@upd');

@@ -19,6 +19,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="serial">#</th>
+                                                    <th></th>
                                                     <th class="avatar">Avatar</th>
                                                     <th>Name</th>
                                                     <th>Role</th>
@@ -30,12 +31,13 @@
                                                 @foreach($allusers as $user)
                                                 <tr>
                                                     <td class="number">{{ $loop->iteration }}</td>
+                                                    <td class="edit"><a href="{{ route('users.edit', $user->id) }}"><i class="fa fa-pencil"></i>Edit User</a></td>
                                                     <td class="avatar">
                                                         <div class="round-img">
-                                                        <a href="{{ url('users', $user->id) }}"><img class="rounded-circle" src="{{ $user->image ? asset($user->image->path) : asset('images/avatar/1.jpg')  }}" alt=""></a>
+                                                        <a href="{{ route('users.show', $user->id) }}"><img class="rounded-circle" src="{{ $user->image ? asset($user->image->path) : asset('images/avatar/1.jpg')  }}" alt=""></a>
                                                         </div>
                                                     </td>
-                                                <td> <a href="{{ url('users', $user->id) }}"> <span class="name">{{ $user->name }}</span> </a></td>
+                                                <td> <a href="{{ route('users.show', $user->id) }}"> <span class="name">{{ $user->name }}</span> </a></td>
                                                     <td> <span class="role">{{ $user->role ? $user->role->name : 'No Role' }} </span> </td>
                                                     <td>
                                                         @if( !$user->is_active == 1)

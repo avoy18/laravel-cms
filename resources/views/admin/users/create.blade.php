@@ -6,7 +6,9 @@
     <div class="row">
             <div class="card col-xl-6 col-lg-12">
                 @if(Session::has('success'))
-                {{ Session::get('success') }}
+                <div class="alert alert-success">
+                    <strong>Success!</strong> {{ Session::get('success') }}
+                </div>
                 @endif
                 <div class="card-header">
                     <strong>Add a new user</strong>

@@ -16,7 +16,6 @@
                 @if($user)
                 <form class="card-body card-block row" method="POST" action="{{ url('admin/users', $user->id) }}" enctype="multipart/form-data" >
                     @csrf 
-                    <input type="hidden" name="_method" value="PUT">
                     {{-- Name --}}
                     <div class="form-group col-md-6">
                         <label for="name" class=" form-control-label">Name</label>
