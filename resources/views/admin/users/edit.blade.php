@@ -106,7 +106,7 @@
                         </span>
                         @endif
                         <br>
-                        <img class="rounded-circle" width="50px" src="{{ $user->image ? asset($user->image->path) : asset('images/avatar/1.jpg')  }}" alt="">
+                        <img class="rounded-circle" width="50px" src="{{ $user->image ? asset($user->image->path) : asset('images/admin.jpg')  }}" alt="">
                         <input type="file" name="avatar">
                     </div>
                     {{-- ./File --}}

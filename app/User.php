@@ -42,8 +42,12 @@ class User extends Authenticatable
         return $this->morphOne('App\Image', 'imageable');
     }
 
+    public function projects(){
+        return $this->hasMany('App\Project');
+    }
+
     public function adminCheck(){
-        if($this->role){
+        if($this->role && $this->is_active){
 
             if($this->role->name == 'Administrator'){
                 return true;

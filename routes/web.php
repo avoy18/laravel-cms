@@ -27,10 +27,14 @@
 
     Route::resource('admin/users', 'AdminUsersController');
 
+    Route::resource('admin/projects', 'AdminProjectsController');
+
     Route::get('admin', function(){
 
-      if(Auth::user()->role == 'Administrator'){
-      return view('admin.dashboard');
+      if(Auth::user()->role){
+        if( Auth::user()->role->name == 'Administrator'){
+          return view('admin.dashboard');
+        }
       }
       else{
         return view('welcome');

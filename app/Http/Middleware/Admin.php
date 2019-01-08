@@ -20,8 +20,11 @@ class Admin
             if(Auth::user()->adminCheck()){
                 return $next($request);
             }
-            return redirect(404);
-        }
+            if(Auth::user()->role == 'Editor' && Auth::user()->is_active == 1 ){
+                return redirect('home');
+            }
+           
+        } return redirect(404);
      
     }
 }

@@ -8,7 +8,7 @@
                 {{-- users --}}
                 <div class="users">
                     <div class="row">
-                        <div class="col-xl-7">
+                        <div class="col-xl-12">
                                 @if(Session::has('success'))
                                 <div class="alert alert-success">
                                     <strong>Success!</strong> {{ Session::get('success') }}

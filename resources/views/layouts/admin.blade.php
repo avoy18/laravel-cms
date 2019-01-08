@@ -32,10 +32,10 @@
 
                     <li class="menu-title">Pages</li>{{-- Menu Title --}}
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Posts</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Projects</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><a href="#">All Posts</a></li>
-                                <li><i class="fa fa-plus"></i><a href="#">New Post</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('projects.index') }}">All projects</a></li>
+                                <li><i class="fa fa-plus"></i><a href="{{ route('projects.create') }}">New project</a></li>
                             </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -113,7 +113,7 @@
                             </div>
                         </div>
     
-                        <div class="dropdown for-message">
+                        {{-- <div class="dropdown for-message">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope"></i>
                                 <span class="count bg-primary">4</span>
@@ -153,12 +153,12 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
     
                     <div class="user-area dropdown float-right">
                         <a href="{{ route('users.show' , Auth::user()->id) }}" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{{ asset(Auth::user()->image->path) }}" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{{ Auth::user()->image ? asset(Auth::user()->image->path) : asset('/images/admin.jpg') }}" alt="User Avatar">
                         </a>
     
                         <div class="user-menu dropdown-menu">
@@ -171,7 +171,7 @@
                                         <i class="fa fa-sign-out"></i>{{ __('Logout') }}
                              </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="project" style="display: none;">
                                         @csrf
                                     </form>
                         </div>
@@ -209,13 +209,15 @@
     {{-- ./right panel --}}
 
     {{-- Scripts --}}
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    {{-- <script src="{{ asset('js/jquery.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
 
+@yield('scripts')
 
 
 

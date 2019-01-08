@@ -2179,6 +2179,15 @@ footer.site-footer {
       max-height: 250px !important;
       overflow: hidden !important; }
 
+      .form-group.mine{display:flex;flex-direction: column; margin-bottom:10px;}
+      
+      .mt-30{margin-top:30px;}
+
+      .proj-image{
+        padding:10px 10px 10px 0px;
+      }
+
+
 @media (max-width: 1680px) {
   .timeline li {
     padding: 2px 0; } }
@@ -2528,3 +2537,5 @@ footer.site-footer {
     left: inherit !important;
     right: 20px !important; }
 /*# sourceMappingURL=style.css.map */
+
+@import 'chosen';

@@ -61,7 +61,7 @@ class AdminUsersController extends Controller
     	if($request->file('avatar')){
            $file = $request->file('avatar');
            $filename = time() . '_' . $file->getClientOriginalName();
-           $path = 'user_uploads/avatars/' .  kebab_case($request->name);
+           $path = 'user_uploads/avatars/';
            $user->image()->create(['path'=> $path . '/' . $filename]);
            $file->move($path, $filename);
 	    }else{
@@ -127,7 +127,7 @@ class AdminUsersController extends Controller
 
     	if($file = $request->file('avatar')){
             $name = time() . $file->getClientOriginalName();
-            $path = 'user_uploads/avatar/' . kebab_case($request->name);
+            $path = 'user_uploads/avatars/';
             $user->image()->create(['path'=> $path . '/' . $name]);
             $file->move($path, $name);
         }
@@ -144,8 +144,16 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id)->delete();
+
+        if($userimage = User::find($id)->image){
+            unlink($userimage->path);
+        }
+        
+        $user = User::findOrFail($id);
+        $user->image()->delete();
+        $user->delete();
         session()->flash('success','User Deleted Successfully');
         return redirect()->route('users.index');
+
     }
 }
