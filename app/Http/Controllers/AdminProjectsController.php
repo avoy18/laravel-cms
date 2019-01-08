@@ -5,6 +5,7 @@ use App\Project;
 use App\Category;
 use App\User;
 use \Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\ProjectCreateRequest;
@@ -116,7 +117,36 @@ class AdminProjectsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        // $user = User::findOrFail($project->$id);
+        $project = Project::findOrFail($id);
+
+        $project->update($input);
+
+        if($cats = $request->categories){
+            $project->categories()->detach();
+            foreach($cats as $catname){
+                $category = Category::where('name', $catname)->first();
+                $project->categories()->attach($category);
+            }
+        }
+
+ 
+
+    	if($request->file('images')){
+
+        foreach($request->file('images') as $image){
+           $filename = time() . '_' . $image->getClientOriginalName();
+           $path = 'user_uploads/projects';
+           $project->images()->create(['path'=> $path . '/' . kebab_case($filename)]);
+           $image->move($path, kebab_case($filename) );
+        }
+
+        }
+    
+        session()->flash('success','Project Created Successfully');
+        return redirect()->back();
     }
 
     /**
@@ -127,6 +157,23 @@ class AdminProjectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+        if($projectimage = Project::find($id)->images){
+            foreach($projectimage as $projimg){
+            if(Storage::disk('public')->exists($projimg->path)){
+            unlink($projimg->path);
+            }
+            $project->images()->find($projimg->id)->delete();
+            }
+        }
+        
+
+
+        $project->delete();
+        session()->flash('success','Project Deleted Successfully');
+        return redirect()->route('projects.index');
+
     }
+    
 }

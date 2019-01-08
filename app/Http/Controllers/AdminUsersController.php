@@ -7,7 +7,7 @@ use App\Http\Requests\UsersRequest;
 use App\Http\Requests\UserEditRequest;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Role;
 use App\Image;
@@ -146,8 +146,16 @@ class AdminUsersController extends Controller
     {
 
         if($userimage = User::find($id)->image){
+          if(Storage::disk('public')->exists($userimage->path)){
             unlink($userimage->path);
+          }
         }
+
+        // if($userprojects = User::find($id)->projects()){
+        //     foreach($userprojects as $project){
+        //         $project->delete();
+        //     }
+        // }
         
         $user = User::findOrFail($id);
         $user->image()->delete();

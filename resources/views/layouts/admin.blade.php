@@ -45,18 +45,12 @@
                                     <li><i class="fa fa-plus"></i><a href="{{ route('users.create') }}">Add User</a></li>
                             </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list"></i>Categories</a>
-                            <ul class="sub-menu children dropdown-menu">
-                                    <li><i class="fa fa-puzzle-piece"></i><a href="#">All Categories</a></li>
-                                    <li><i class="fa fa-plus"></i><a href="#">New Category</a></li>
-
-                            </ul>
-                    </li>
+                    <li class="">
+                        <a href="{{ route('categories.index') }}"> <i class="menu-icon fa fa-list"></i>Categories</a></li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-image"></i>Media</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><a href="#">All Media</a></li>
+                                <li><i class="fa fa-puzzle-piece"></i><a href="">All Media</a></li>
                                 <li><i class="fa fa-plus"></i><a href="#">Add Media</a></li>
                             </ul>
                     </li>
@@ -171,7 +165,7 @@
                                         <i class="fa fa-sign-out"></i>{{ __('Logout') }}
                              </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="project" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                         </div>

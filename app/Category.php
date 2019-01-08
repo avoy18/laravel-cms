@@ -9,4 +9,8 @@ class Category extends Model
 protected $fillable = [
     'name'
 ];
+
+public function projects(){
+    return $this->belongsToMany('App\Project');
+}
 }
