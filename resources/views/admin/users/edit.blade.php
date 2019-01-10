@@ -50,7 +50,7 @@
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                         @endif
-                        <input type="password" id="password" placeholder="Set new password" name="password" class="form-control">
+                        <input type="password" id="password" name="password" class="form-control">
                     </div>
                     {{-- ./Pass --}}
 
